@@ -2,10 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>141a7d98-163f-412f-9ab9-bd39a0aa5dbf</groupId>
-	<artifactId>mule-sec-ops-4</artifactId>
+	<artifactId>sec-ops-4</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>mule-application</packaging>
-	<name>mule-sec-ops-4</name>
+	<name>sec-ops-4</name>
 	<scm>
 		<url>https://github.com/sidd-harth/mule-sec-ops-4.git</url>
 		<connection>scm:git:https://github.com/sidd-harth/mule-sec-ops-4.git</connection>
