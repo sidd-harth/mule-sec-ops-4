@@ -116,10 +116,13 @@
 					</execution>
 				</executions>
 				<configuration>
+					<runtimeProduct>MULE_EE</runtimeProduct>
 					<coverage>
 						<runCoverage>true</runCoverage>
 						<formats>
 							<format>html</format>
+							<format>json</format>
+							<format>console</format>
 						</formats>
 					</coverage>
 				</configuration>
