@@ -139,6 +139,8 @@ pipeline {
                     def environment_id = postman_envs.environment.values.findIndexOf{ it.key == "target_environment_id" }
                    
                     sh """ newman run Integration-Testing.postman_collection.json \
+                                    --env-var anypoint_username=$ANYPOINT_PLATFORM_CREDENTIALS_USR \
+                                    --env-var anypoint_password=$ANYPOINT_PLATFORM_CREDENTIALS_PSW \
                                     --env-var target_application_name=${env.POM_ARTIFACT_ID}-qa \
                                     --env-var client_id=${postman_envs.environment.values[client_id].value} \
                                     --env-var client_secret=${postman_envs.environment.values[client_secret].value} \

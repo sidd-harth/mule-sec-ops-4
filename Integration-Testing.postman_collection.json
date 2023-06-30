@@ -7,6 +7,79 @@
 	},
 	"item": [
 		{
+			"name": "Get-Bearer-Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"  console.log(\"Get-Bearer-Token completed successfully\");",
+							"});",
+							"pm.test(\"Set Access Token\", function () {",
+							"  var jsonData = pm.response.json();",
+							"  pm.environment.set(\"access_token\", jsonData.access_token);",
+							"  console.log(\"Access Token: \" + pm.environment.get(\"access_token\"));",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "{{anypoint_username}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{anypoint_password}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://anypoint.mulesoft.com/accounts/login",
+					"protocol": "https",
+					"host": [
+						"anypoint",
+						"mulesoft",
+						"com"
+					],
+					"path": [
+						"accounts",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Check-Application-Status",
 			"event": [
 				{
