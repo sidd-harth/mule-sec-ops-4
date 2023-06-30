@@ -25,8 +25,8 @@ pipeline {
     parameters {
         //string( name: 'BRANCH', description: 'Name of the Release Branch to be built? (e.g. release/1.1.0-1)' )
         choice( name: 'ENVIRONMENT', choices: "qa\nprod", description: 'Environment where Mule Application will be deployed' )
-        string( name: 'API_VERSION', defaultValue: 'v1', description: 'Version of API Instance for pairing with Mule Application (e.g. v1)' )
-        string( name: 'ORGANIZATION', defaultValue: 'sec-ops-2', description: 'Org or BusinessGroup to deploy the API' )
+        string( name: 'API_VERSION', defaultValue: '1.0.0', description: 'Version of API Instance for pairing with Mule Application (e.g. v1)' )
+        string( name: 'ORGANIZATION', defaultValue: 'sec-org', description: 'Org or BusinessGroup to deploy the API' )
     }    
        
     stages {
