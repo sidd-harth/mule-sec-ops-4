@@ -32,7 +32,7 @@ pipeline {
     stages {
 
 
-        stage('echo') {
+/*        stage('echo') {
             steps {
                 echo "$ANYPOINT_PLATFORM_CREDENTIALS_USR"
                 echo "$ANYPOINT_PLATFORM_CREDENTIALS_PSW"
@@ -128,6 +128,8 @@ pipeline {
                 }
             }
         }
+
+        */
         stage('QA Integration Testing') {
             steps {
                 script {
@@ -150,6 +152,21 @@ pipeline {
                     echo "QA Integration Testing: ${currentBuild.currentResult}"
                 }
             }
+            post {
+                    success {
+                        echo "...QA Integration Testing Succeeded for ${env.BUILD_VERSION}: ${currentBuild.currentResult}"
+                        publishHTML (target : [allowMissing: true,
+                                                alwaysLinkToLastBuild: true,
+                                                keepAll: true,
+                                                reportDir: './newman',
+                                                reportFiles: 'qa-integration-testing-report.html',
+                                                reportName: 'QA Integration Test Reports',
+                                                reportTitles: 'Test Report'])
+                    } 
+                    failure {
+                        echo "...Promote API from Development Failed for ${env.BUILD_VERSION}: ${currentBuild.currentResult}"
+                    }
+                }  
         }
     }
 }

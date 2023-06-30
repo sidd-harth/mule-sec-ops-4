@@ -6,6 +6,6 @@ fileignoreconfig:
 - filename: Integration-Testing.postman_collection.json
   checksum: 92c05405ba23816f91704daff1e7392b689d39a7892eb33eca3f16433df54e7e
 - filename: Jenkinsfile
-  checksum: 636b1a106cda4b9d934447019efc27912e682c87eb8cfd0913634996f70ef0f9
+  checksum: 64fb20b786a1a87e10304498507af3a93c3e98d5a82d845ec95b8f02fb988dc5
 version: ""
 
