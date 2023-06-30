@@ -102,9 +102,9 @@
 							"          setTimeout(function(){ ",
 							"                console.log(\"Sleep for 30 seconds before Retrying\");",
 							"            }, 30000);",
-							"            postman.setNextRequest(\"GetApplicationStatus\");",
+							"            postman.setNextRequest(\"Check-Application-Status\");",
 							"        } else {",
-							"          postman.setNextRequest(\"Get-Flights\");",
+							"          postman.setNextRequest(\"Invoke-Application\");",
 							"          console.log(\"Application has been deployed Successfully\");",
 							"        }",
 							"        currentCount++;",
@@ -170,7 +170,7 @@
 			"response": []
 		},
 		{
-			"name": "Invoke App UriPath",
+			"name": "Invoke-Application",
 			"event": [
 				{
 					"listen": "test",
