@@ -1,0 +1,147 @@
+{
+	"info": {
+		"_postman_id": "5aba8f04-3c05-4b05-9360-9c3cd4b2ae4d",
+		"name": "Integration-Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "739551"
+	},
+	"item": [
+		{
+			"name": "Check-Application-Status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get Application Status\", function() {",
+							"  var jsonData = pm.response.json();",
+							"  pm.environment.set(\"application_status\", jsonData.status);",
+							"  console.log(\"Application Status: \" + pm.environment.get(\"application_status\"));",
+							"});",
+							"",
+							"// Code to check Application Status",
+							"pm.test(\"Check Application Status\", function() {",
+							"    let currentCount = parseInt(pm.environment.get(\"app_counter\")); ",
+							"    let numberOfLoops = 10;",
+							"    var body = JSON.parse(responseBody);",
+							"    if (currentCount < numberOfLoops) {",
+							"        if (pm.environment.get(\"application_status\") !== \"STARTED\") {",
+							"          setTimeout(function(){ ",
+							"                console.log(\"Sleep for 30 seconds before Retrying\");",
+							"            }, 30000);",
+							"            postman.setNextRequest(\"GetApplicationStatus\");",
+							"        } else {",
+							"          postman.setNextRequest(\"Get-Flights\");",
+							"          console.log(\"Application has been deployed Successfully\");",
+							"        }",
+							"        currentCount++;",
+							"        pm.environment.set(\"counter\", currentCount);",
+							"    } else {",
+							"        console.log(\"Exceeded maximum retry count: \" + pm.environment.get(\"counter\"));",
+							"        throw new Error(\"Exceeded maximum retry count: \" + pm.environment.get(\"counter\"));",
+							"    }",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"if (!pm.environment.has(\"app_counter\")) {",
+							"    console.log(\"Setting APP counter now\");",
+							"    pm.environment.set(\"app_counter\", 0);",
+							" }"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-ANYPNT-ENV-ID",
+						"type": "text",
+						"value": "{{target_environment_id}}"
+					}
+				],
+				"url": {
+					"raw": "https://anypoint.mulesoft.com/cloudhub/api/v2/applications/{{target_application_name}}",
+					"protocol": "https",
+					"host": [
+						"anypoint",
+						"mulesoft",
+						"com"
+					],
+					"path": [
+						"cloudhub",
+						"api",
+						"v2",
+						"applications",
+						"{{target_application_name}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invoke App UriPath",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    console.log(\"Get-App completed successfully\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "client_id",
+						"value": "{{client_id}}",
+						"type": "text"
+					},
+					{
+						"key": "client_secret",
+						"value": "{{client_secret}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{target_application_name}}.us-e2.cloudhub.io/api/{{uriPath}}",
+					"protocol": "http",
+					"host": [
+						"{{target_application_name}}",
+						"us-e2",
+						"cloudhub",
+						"io"
+					],
+					"path": [
+						"api",
+						"{{uriPath}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

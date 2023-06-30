@@ -69,7 +69,7 @@ pipeline {
                                 --disable-unicode \
                                 --color on \
                                 --reporters cli,json,htmlextra \
-                                --reporter-htmlextra-export ./newman/report.html \
+                                --reporter-htmlextra-export ./newman/promote-api-report.html \
                                 --reporter-json-export promote-api-output.json """
                     echo "Promoted API from Testing: ${currentBuild.currentResult}"
                 }
@@ -125,19 +125,29 @@ pipeline {
                                     -Danypoint.platform.client.id=$QA_CLIENT_ID \
                                     -Danypoint.platform.client.secret=$QA_CLIENT_SECRET \
                                     -Dapi.id=${postman_envs.environment.values[auto_discovery_id].value} """ 
-               /*      sh """ mvn --batch-mode deploy -DmuleDeploy \
-                                    -Dmule.env=qa \
-                                    -Dcloudhub.application.name=test-newman-qa \
-                                    -Dcloudhub.environment=qa \
-                                    -Dartifact.path=target/dependency/test-newman-1.0.0-SNAPSHOT-mule-application.jar \
-                                    -Dcloudhub.workers=1 \
-                                    -Dcloudhub.worker.type=MICRO \
-                                    -Dcloudhub.region=us-east-2 \
-                                    -Dap.ca.client_id=029c18d8ee8d4c3d8601e6ceb34f63ba \
-                                    -Dap.ca.client_secret=593CE8AFA42F4002A19974FcC591983e \
-                                    -Danypoint.platform.client.id=006ed11f12894f1fb11919b3e72a1722 \
-                                    -Danypoint.platform.client.secret=006ed11f12894f1fb11919b3e72a1722 \
-                                    -Dapi.id=18728487  """ */
+                }
+            }
+        }
+        stage('QA Integration Testing') {
+            steps {
+                script {
+                    def postman_envs = readJSON file: 'promote-api-output.json'
+                    def client_id = postman_envs.environment.values.findIndexOf{ it.key == "client_id" }
+                    def client_secret = postman_envs.environment.values.findIndexOf{ it.key == "client_secret" }
+                    def environment_id = postman_envs.environment.values.findIndexOf{ it.key == "target_environment_id" }
+                   
+                    sh """ newman run Integration-Testing.postman_collection.json \
+                                    --env-var=${env.POM_ARTIFACT_ID}-qa \
+                                    --env-var=${postman_envs.environment.values[client_id].value} \
+                                    --env-var=${postman_envs.environment.values[client_secret].value} \
+                                    --env-var=${postman_envs.environment.values[environment_id].value} \
+                                    --env-var=hello \
+                                    --disable-unicode \
+                                    --color on \
+                                    --reporters cli,json,htmlextra \
+                                    --reporter-htmlextra-export ./newman/qa-integration-testing-report.html \
+                                    --reporter-json-export qa-integration-testing-output.json """
+                    echo "QA Integration Testing: ${currentBuild.currentResult}"
                 }
             }
         }
