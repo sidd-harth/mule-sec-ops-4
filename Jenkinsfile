@@ -139,10 +139,10 @@ pipeline {
                     def environment_id = postman_envs.environment.values.findIndexOf{ it.key == "target_environment_id" }
                    
                     sh """ newman run Integration-Testing.postman_collection.json \
-                                    --env-var target_environment_name=${env.POM_ARTIFACT_ID}-qa \
+                                    --env-var target_application_name=${env.POM_ARTIFACT_ID}-qa \
                                     --env-var client_id=${postman_envs.environment.values[client_id].value} \
                                     --env-var client_secret=${postman_envs.environment.values[client_secret].value} \
-                                    --env-var environment_id=${postman_envs.environment.values[environment_id].value} \
+                                    --env-var target_environment_id=${postman_envs.environment.values[environment_id].value} \
                                     --env-var uriPath=hello \
                                     --disable-unicode \
                                     --color on \
