@@ -116,6 +116,7 @@
 					</execution>
 				</executions>
 				<configuration>
+					<env>${env}</env>
 					<runtimeProduct>MULE_EE</runtimeProduct>
 					<coverage>
 						<runCoverage>true</runCoverage>
