@@ -32,7 +32,7 @@ pipeline {
     stages {
 
 
-/*        stage('echo') {
+      stage('echo') {
             steps {
                 echo "$ANYPOINT_PLATFORM_CREDENTIALS_USR"
                 echo "$ANYPOINT_PLATFORM_CREDENTIALS_PSW"
@@ -129,7 +129,7 @@ pipeline {
             }
         }
 
-        */
+        
         stage('QA Integration Testing') {
             steps {
                 script {
