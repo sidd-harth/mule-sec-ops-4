@@ -36,7 +36,7 @@ pipeline {
                // sh 'mvn jmeter:configure jmeter:gui'   // get jmeter ui
                sh "mvn clean com.lazerycode.jmeter:jmeter-maven-plugin:2.8.6:jmeter \
                      -Did=ebf1c03266b343dbbb19ad6e4783faba \
-                     -Dsecret=09072b0fcC714e91B6141F293B9f9b44"
+                     -Dsecret=09072b0fcC714e91B6141F293B9f9b44-RMAGI"
             }
                   	post{
       		always{
