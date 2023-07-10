@@ -38,6 +38,13 @@ pipeline {
                      -Did=ebf1c03266b343dbbb19ad6e4783faba \
                      -Dsecret=09072b0fcC714e91B6141F293B9f9b44"
             }
+                  	post{
+      		always{
+	      			perfReport 'results/*.csv'
+	    	 	}
+      		
+      		}
+      	}
         }
 
 
