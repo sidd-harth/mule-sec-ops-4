@@ -41,6 +41,14 @@ pipeline {
                   	post{
       		always{
 	      			perfReport 'results/*.csv'
+
+                    publishHTML (target : [allowMissing: true,
+                                            alwaysLinkToLastBuild: true,
+                                            keepAll: true,
+                                            reportDir: 'target/jmeter/reports/test1',
+                                            reportFiles: 'index.html',
+                                            reportName: 'JMeter Performance Reports',
+                                            reportTitles: 'Performance Report'])
 	    	 	}
       		
       		}
