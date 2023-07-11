@@ -40,7 +40,7 @@ pipeline {
             }
                   	post{
       		always{
-	      			perfReport 'results/*.csv'
+	      			perfReport 'target/jmeter/results/*.csv'
 
                     publishHTML (target : [allowMissing: true,
                                             alwaysLinkToLastBuild: true,

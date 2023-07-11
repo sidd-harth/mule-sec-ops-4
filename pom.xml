@@ -53,78 +53,57 @@
 	</profiles>
 	<build>
 		<plugins>
-		<plugin>
-                     <groupId>com.lazerycode.jmeter</groupId>
-                     <artifactId>jmeter-maven-plugin</artifactId>
-                     <version>2.8.6</version>
-                     <executions>
-                         <!-- Run JMeter tests -->
-                         <execution>
-                             <id>jmeter-tests</id>
-                             <phase>verify</phase>
-                             <goals>
-                                 <goal>jmeter</goal>
-                             </goals>
-                         </execution>
-                         <!-- Fail build on errors in test -->
-                        <execution>
-                             <id>jmeter-check-results</id>
-                             <goals>
-                                <goal>results</goal>
-                             </goals>
-                        </execution>  
-                     </executions>
+					<plugin>
+										<groupId>com.lazerycode.jmeter</groupId>
+				<artifactId>jmeter-maven-plugin</artifactId>
+				<version>2.9.0</version>
+				<executions>
+					<!-- Generate JMeter configuration -->
+					<execution>
+						<id>configuration</id>
+						<goals>
+							<goal>configure</goal>
+						</goals>
+					</execution>
+					<!-- Run JMeter tests -->
+					<execution>
+						<id>jmeter-tests</id>
+						<goals>
+							<goal>jmeter</goal>
+						</goals>
+					</execution>
+					<!-- Fail build on errors in test -->
+					<execution>
+						<id>jmeter-check-results</id>
+						<goals>
+							<goal>results</goal>
+						</goals>
+					</execution>
+				</executions>
                      
-                     <configuration>
-                        <resultsDirectory>results</resultsDirectory>
-                        <generateReports>true</generateReports>
-                        <scanResultsForFailedRequests>true</scanResultsForFailedRequests>
-                        <ignoreResultFailures>false</ignoreResultFailures>
-                                        <propertiesJMeter>
-                                                  <BUILD_TAG>${project.version}</BUILD_TAG>
-                                                  <threads>70</threads>
-                                                  <duration>30</duration>
-												  <client_id>${id}</client_id>
-											      <client_secret>${secret}</client_secret>
-                                             </propertiesJMeter>
-                                             <jMeterProcessJVMSettings>
-                                                  <arguments>
-                                                      <argument>-XX:MaxMetaspaceSize=256m</argument>
-													  <argument>-Xmx1024m</argument>
-                                                      <argument>-Xms1024m</argument>
-                                                  </arguments>
-                                              </jMeterProcessJVMSettings>        
-                     </configuration>
-                    <!-- <dependencies>
-                               <dependency>
-                                 <groupId>kg.apc</groupId>
-                                 <artifactId>jmeter-plugins</artifactId>
-                                 <version>1.0.0</version>
-                                 <exclusions>
-                                    
-                                       Unfortunately some transitive dependencies cannot be found on mvncentral
-                                       and we have to explicitly exclude them.
-                                       For a complete list, see https://github.com/mlex/jmeter-maven-example/
-                                   
-                                   <exclusion>
-                                       <groupId>kg.apc</groupId>
-                                       <artifactId>perfmon</artifactId>
-                                   </exclusion>
-                              
-                            
-                               
-                                       Because of a bug in the jmeter-maven-plugin (see 
-                                      https://github.com/Ronnie76er/jmeter-maven-plugin/issues/77) we have to
-                                       exclude jmeter dependencies here, too.
-                              
-                                   <exclusion>
-                                       <groupId>org.apache.jmeter</groupId>
-                                       <artifactId>jorphan</artifactId>
-                                   </exclusion>
-                               
-                                 </exclusions>
-                               </dependency>
-                             </dependencies>-->
+						<configuration>
+							<!-- <resultsDirectory>results</resultsDirectory>  -->
+							<appendResultsTimestamp>true</appendResultsTimestamp>
+							<resultsFileNameDateFormat>d-MMM-y--HH-mm-ss-SSSS</resultsFileNameDateFormat>
+							<generateReports>true</generateReports>
+							<scanResultsForFailedRequests>true</scanResultsForFailedRequests>
+							<scanResultsForSuccessfulRequests>true</scanResultsForSuccessfulRequests>
+							<propertiesJMeter>
+								<BUILD_TAG>${project.version}</BUILD_TAG>
+								<threads>70</threads>
+								<duration>30</duration>
+								<client_id>${id}</client_id>
+								<client_secret>${secret}</client_secret>
+							</propertiesJMeter>
+							<jMeterProcessJVMSettings>
+								<arguments>
+									<argument>-XX:MaxMetaspaceSize=256m</argument>
+									<argument>-Xmx1024m</argument>
+									<argument>-Xms1024m</argument>
+								</arguments>
+							</jMeterProcessJVMSettings>
+						</configuration>
+                   
                  </plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
