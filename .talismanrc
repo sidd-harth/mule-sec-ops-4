@@ -1,6 +1,8 @@
 fileignoreconfig:
+- filename: src/test/jmeter/test1.jmx
+  checksum: d0f1d6bf9f6448ece3465cd90342ad805b811d7dd7f3dcb7fc8991bea983e899
 - filename: pom.xml
-  checksum: 06a3fea34827f7f1866216edee6e45896dfe9da64f7b6ae9382f42473eed7afe
+  checksum: 4b8f1030df32e54bf2900533abea4626cfaf6e9b6768f7766768814a6f0985e4
 - filename: Promote-API.postman_collection-v7.json
   checksum: 54f451969d2f1bb6665b7a042d4a6e78efc781224ffddaafd9eae80fc740c851
 - filename: Jenkinsfile
