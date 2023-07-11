@@ -90,10 +90,10 @@
 							<scanResultsForSuccessfulRequests>true</scanResultsForSuccessfulRequests>
 							<propertiesJMeter>
 								<BUILD_TAG>${project.version}</BUILD_TAG>
-								<threads>70</threads>
-								<duration>30</duration>
-								<client_id>${id}</client_id>
-								<client_secret>${secret}</client_secret>
+								<threads>${threads}</threads>
+								<duration>${duration}</duration>
+								<client_id>${api_client_id}</client_id>
+								<client_secret>${api_client_secret}</client_secret>
 							</propertiesJMeter>
 							<jMeterProcessJVMSettings>
 								<arguments>

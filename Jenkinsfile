@@ -31,28 +31,7 @@ pipeline {
        
     stages {
 
-      stage('JMeter - Load Test') {
-            steps {
-               // sh 'mvn jmeter:configure jmeter:gui'   // get jmeter ui
-               sh "mvn clean verify -DskipMunitTests \
-                     -Did=ebf1c03266b343dbbb19ad6e4783faba \
-                     -Dsecret=09072b0fcC714e91B6141F293B9f9b44"
-            }
-                  	post{
-      		always{
-	      			perfReport 'target/jmeter/results/*.csv'
 
-                    publishHTML (target : [allowMissing: true,
-                                            alwaysLinkToLastBuild: true,
-                                            keepAll: true,
-                                            reportDir: 'target/jmeter/reports/test1',
-                                            reportFiles: 'index.html',
-                                            reportName: 'JMeter Performance Reports',
-                                            reportTitles: 'Performance Report'])
-	    	 	}
-      		
-      		}
-      	}
         
 
 
@@ -195,5 +174,39 @@ pipeline {
                 }  
         }
         */
+    
+      stage('JMeter - Load Test') {
+            steps {
+                script {
+                    def postman_envs = readJSON file: 'promote-api-output.json'
+                    def client_id = postman_envs.environment.values.findIndexOf{ it.key == "client_id" }
+                    def client_secret = postman_envs.environment.values.findIndexOf{ it.key == "client_secret" }
+               
+                    // sh 'mvn jmeter:configure jmeter:gui'   // get jmeter ui
+                    sh """ mvn clean verify -DskipMunitTests \
+                            -Dthreads=100 \
+                            -Dduration=30 \
+                            -Dapi_client_id=${postman_envs.environment.values[client_id].value} \
+                            -Dapi_client_secret=${postman_envs.environment.values[client_secret].value} """
+            
+                }
+            
+            }
+                  	post{
+      		always{
+	      			perfReport 'target/jmeter/results/*.csv'
+
+                    publishHTML (target : [allowMissing: true,
+                                            alwaysLinkToLastBuild: true,
+                                            keepAll: true,
+                                            reportDir: 'target/jmeter/reports/test1',
+                                            reportFiles: 'index.html',
+                                            reportName: 'JMeter Performance Reports',
+                                            reportTitles: 'Performance Report'])
+	    	 	}
+      		
+      		}
+      	}    
+    
     }
 }
