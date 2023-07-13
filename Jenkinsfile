@@ -173,7 +173,7 @@ pipeline {
                     }
                 }  
         }
-        */
+        
     
       stage('JMeter - Load Test') {
             steps {
@@ -206,7 +206,13 @@ pipeline {
 	    	 	}
       		
       		}
-      	}    
-    
+      	}    */
+
+        stage('BDD') {
+            steps {
+                sh """ cd bdd && bat """
+            }
+        }
+
     }
 }

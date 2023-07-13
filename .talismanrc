@@ -9,5 +9,7 @@ fileignoreconfig:
   checksum: e652cf75e81fae15615a94080cf368b7287dd39ff29d241231681f655b123e05
 - filename: Integration-Testing.postman_collection.json
   checksum: 5b5039243ffd11c0255ea239964c4c9020836c10b03872af755e1501eded2db9
+- filename: bdd/bat.yaml
+  checksum: 7af047c0d12c707f1fef1120978b3f02599365ee1fa2b2d27acf76b7ee77e7f1
 version: ""
 

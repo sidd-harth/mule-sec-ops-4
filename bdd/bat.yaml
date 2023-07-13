@@ -1,0 +1,34 @@
+suite:
+  name: "Hello World Suite"
+files:
+  - file: tests/HelloWorld.dwl
+reporters:
+    - type: HTML
+      outFile: /HTML.html
+  # - type: SumoLogic
+  #   options:
+  #     SUMO_ENDPOINT: <sumo_source>
+  #     DISABLED_FOR_CONFIGS: devx,qax # Single value or comma separated value of config filenames (without .dwl). This will disable the reporter execution for the specified configs.
+  # - type: PagerDuty
+  #   options:
+  #     PAGER_DUTY_ROUTING_KEY: <routing_key>
+  #     DISABLED_FOR_CONFIGS: devx,qax # Single value or comma separated value of config filenames (without .dwl). This will disable the reporter execution for the specified configs.
+  # - type: Slack
+  #   options:
+  #     SLACK_WEBHOOK: <webhook_url>
+  #     SEND_NOTIFICATION_IF_PASSED: true # Enabling this will cause the slack message to be sent if the tests pass
+  #     AT_HERE_ENABLED: true # Enabling this will cause the slack message to add @here in the message if the tests fail
+  #     DISABLED_FOR_CONFIGS: devx,qax # Single value or comma separated value of config filenames (without .dwl). This will disable the reporter execution for the specified configs.
+  # - type: Email
+  #   options:
+  #     EMAILS: <email_list>
+  #     SEND_NOTIFICATION_IF_PASSED: true # Enabling this will cause the email to be sent if the tests pass
+  #     DISABLED_FOR_CONFIGS: devx,qax # Single value or comma separated value of config filenames (without .dwl). This will disable the reporter execution for the specified configs.
+  # - type: NewRelic
+  #   options:
+  #     NEW_RELIC_LICENSE_KEY: <license_key>
+  #     DISABLED_FOR_CONFIGS: devx,qax # Single value or comma separated value of config filenames (without .dwl). This will disable the reporter execution for the specified configs.
+  # - type: JSON
+  #   outFile: /tmp/JSON.json
+  # - type: JUnit
+  #   outFile: /tmp/JUnit.xml
