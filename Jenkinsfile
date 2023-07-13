@@ -210,7 +210,7 @@ pipeline {
 
         stage('BDD') {
             steps {
-                sh """ cd bdd && bat """
+                sh """ cd bdd && bat-cli """
             }
         }
 
